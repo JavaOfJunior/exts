@@ -28,7 +28,7 @@ public class DocConverters {
     private File pdfFile;
     private File swfFile;
 
-    private static final String imageFilePath = "D:/11/111.jpg";   // 添加水印图片路径
+    private static final String imageFilePath = "D:/11/111.png";   // 添加水印图片路径
     private String fileWaterName;   //转换水印后的docx、pdf文件绝对路径+文件名称
     private File pdfWaterFile;
 
@@ -103,7 +103,7 @@ public class DocConverters {
             if(pdfFile.exists())
             {   //windows环境转换
                 try {
-                    Process p=r.exec("D:\\Program Files\\SWFTools\\pdf2swf.exe \""+pdfFile.getPath()+"\"  -o \""+swfFile.getPath()+"\" -T 9 -f");
+                    Process p=r.exec("D:\\Program Files\\SWFTools\\pdf2swf.exe \""+pdfFile.getPath()+"\"  -o \""+swfFile.getPath()+"\" -T 9  -f");
                     loadStream(p.getInputStream()) ;
                     if(!swfFile.exists())
                     {
@@ -154,7 +154,7 @@ public class DocConverters {
             System.out.println("fileString:"+fileString);
             PdfReader pdfReader = new PdfReader(fileString);
             PdfStamper pdfStamper = new PdfStamper(pdfReader, new FileOutputStream( fileWaterName+".pdf"));
-            addWatermark(pdfStamper, "公司内部文件，请注意保密！");
+            addWatermark(pdfStamper, "请注意保密！");
             pdfStamper.close();
             pdfReader.close();
             pdf2swf(pdfWaterFile); //把需要转换的pdf转换成swf
@@ -181,15 +181,15 @@ public class DocConverters {
     //warterMarkName 水印名
     private static void waterMark(String inputFile, String outputFile,String waterMarkName) {
         try {
-            PdfReader reader = new PdfReader("D:/11/project.pdf");
+            PdfReader reader = new PdfReader(inputFile);
             // Get the PdfStamper object
-            PdfStamper stamper = new PdfStamper(reader, new FileOutputStream( "d:/11/itext1-demo22.pdf"));
+            PdfStamper stamper = new PdfStamper(reader, new FileOutputStream( outputFile));
             // 设置密码
             //stamper.setEncryption(userPassWord.getBytes(), ownerPassWord.getBytes(), permission, false);
             BaseFont base = BaseFont.createFont("STSong-Light", "UniGB-UCS2-H", BaseFont.NOT_EMBEDDED);
             int total = reader.getNumberOfPages() + 1;
-            Image image = Image.getInstance(imageFilePath);
-            image.setAbsolutePosition(200, 400);
+//            Image image = Image.getInstance(imageFilePath);
+//            image.setAbsolutePosition(200, 400);
             PdfContentByte under;
             int j = waterMarkName.length();
             char c = 0;
@@ -198,7 +198,7 @@ public class DocConverters {
                 rise = 500;
                 under = stamper.getUnderContent(i);
                 // 添加图片
-                under.addImage(image);
+//                under.addImage(image);
                 under.beginText();
                 under.setColorFill(BaseColor.CYAN);
                 under.setFontAndSize(base, 30);
@@ -239,8 +239,8 @@ public class DocConverters {
         BaseFont base = null;
         com.itextpdf.text.Rectangle pageRect = null;
         PdfGState gs = new PdfGState();
-        Image image = Image.getInstance(imageFilePath);
-        image.setAbsolutePosition(200, 400);
+//        Image image = Image.getInstance(imageFilePath);
+//        image.setAbsolutePosition(200, 400);
         try {
             // 设置字体
             base = BaseFont.createFont("STSongStd-Light", "UniGB-UCS2-H",BaseFont.NOT_EMBEDDED);
@@ -266,10 +266,10 @@ public class DocConverters {
                 //获得PDF最顶层
                 content = pdfStamper.getOverContent(i);
                 content.saveState();
-                content.addImage(image);
+//                content.addImage(image);
                 content.setGState(gs);
                 content.beginText();
-                content.setColorFill(BaseColor.GRAY);  //设置颜色
+                content.setColorFill(BaseColor.RED);  //设置颜色
                 content.setFontAndSize(base, 60);
                 // 水印文字成45度角倾斜
                 content.showTextAligned(Element.ALIGN_CENTER,waterMarkName,x,y,45);
@@ -288,13 +288,13 @@ public class DocConverters {
 
 
     public static void main(String[] args)throws Exception{
-        PdfReader pdfReader = new PdfReader("D:\\11\\chap5权限.pdf");
-        // Get the PdfStamper object
-        PdfStamper pdfStamper = new PdfStamper(pdfReader, new FileOutputStream( "d:\\11\\itext1-demo22.pdf"));
-        addWatermark(pdfStamper, "公司内部文件，请注意保密！");
-
-        pdfStamper.close();
-//        //   waterMark("d:/11/123.pdf","d:/11/project.pdf","主要保存");
+//        PdfReader pdfReader = new PdfReader("D:\\11\\chap5权限.pdf");
+//        // Get the PdfStamper object
+//        PdfStamper pdfStamper = new PdfStamper(pdfReader, new FileOutputStream( "d:\\11\\itext1-demo22.pdf"));
+//        addWatermark(pdfStamper, "公司内部文件，请注意保密！");
+//
+//        pdfStamper.close();
+//   waterMark("d:/11/12.pdf","d:/11/p1roject.pdf","主要保111存");
 //
 //        DocConverters d= new DocConverters();
 //      d.ini("D:/11/project.pdf","D:/11/");
