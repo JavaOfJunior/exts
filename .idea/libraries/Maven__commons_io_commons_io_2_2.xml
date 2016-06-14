@@ -3,7 +3,11 @@
     <CLASSES>
       <root url="jar://$USER_HOME$/.m2/repository/commons-io/commons-io/2.2/commons-io-2.2.jar!/" />
     </CLASSES>
-    <JAVADOC />
-    <SOURCES />
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.m2/repository/commons-io/commons-io/2.2/commons-io-2.2-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.m2/repository/commons-io/commons-io/2.2/commons-io-2.2-sources.jar!/" />
+    </SOURCES>
   </library>
 </component>

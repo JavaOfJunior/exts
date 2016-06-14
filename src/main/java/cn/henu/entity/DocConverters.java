@@ -105,10 +105,10 @@ public class DocConverters {
                 try {
                     Process p=r.exec("D:\\Program Files\\SWFTools\\pdf2swf.exe \""+pdfFile.getPath()+"\"  -o \""+swfFile.getPath()+"\" -T 9  -f");
                     loadStream(p.getInputStream()) ;
-                    if(!swfFile.exists())
-                    {
-                        p.waitFor();			//等待子进程的结束，子进程就是系统调用文件转换这个新进程
-                    }
+//                    if(!swfFile.exists())
+//                    {
+//                        p.waitFor();			//等待子进程的结束，子进程就是系统调用文件转换这个新进程
+//                    }
                     p.destroy() ;
                     System.err.println("****swf转换成功，文件输出："
                             + swfFile.getPath() + "****");
@@ -156,8 +156,8 @@ public class DocConverters {
             PdfStamper pdfStamper = new PdfStamper(pdfReader, new FileOutputStream( fileWaterName+".pdf"));
             addWatermark(pdfStamper, "请注意保密！");
             pdfStamper.close();
-            pdfReader.close();
-            pdf2swf(pdfWaterFile); //把需要转换的pdf转换成swf
+
+           // pdf2swf(pdfWaterFile); //把需要转换的pdf转换成swf
         } catch (Exception e) {
             throw e ;
         }
@@ -172,9 +172,11 @@ public class DocConverters {
     //得到swf的路径
     public String getswfPath()
     {
-        return this.swfShowName ;
+        return this.swfShowName;
     }
-
+    public  String getFileWaterName(){
+    return pdfWaterFile.getName();
+}
     //在pdf上添加水印
     //inputFile 原始文件
     //outputFile 水印输出文件
@@ -258,8 +260,7 @@ public class DocConverters {
             gs.setStrokeOpacity(0.4f);
             int toPage = pdfStamper.getReader().getNumberOfPages();
             for (int i = 1; i <= toPage; i++) {
-                pageRect = pdfStamper.getReader().
-                        getPageSizeWithRotation(i);
+                pageRect = pdfStamper.getReader().getPageSizeWithRotation(i);
                 // 计算水印X,Y坐标
                 float x = pageRect.getWidth() / 2;
                 float y = pageRect.getHeight() / 2;
