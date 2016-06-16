@@ -32,16 +32,18 @@ public class DocConverters {
     private String fileWaterName;   //转换水印后的docx、pdf文件绝对路径+文件名称
     private File pdfWaterFile;
 
-    public void ini(String fileString, String swfName) {
+    public void ini(String fileString, String swfName,String waterF,String fileOrigionName) {
         String newName = UUID.randomUUID().toString() ; //随机生成序列号，防止乱码
         this.fileString = fileString;
         this.fileName = fileString.substring(0,fileString.lastIndexOf("."));
-        this.fileWaterName =this.fileName+"12";
+        this.fileWaterName =waterF+fileOrigionName.substring(0,fileOrigionName.lastIndexOf("."))+"-water";
         this.swfName = swfName + newName ;
         this.swfShowName = "uploads/" + newName + ".swf" ;
         docFile=new File(this.fileString);
         pdfFile=new File(this.fileName+".pdf");
+
         pdfWaterFile = new File(this.fileWaterName+".pdf");
+
         swfFile=new File(this.swfName+".swf");
     }
 

@@ -30,10 +30,15 @@ public class UploadController {
       String url=uplopMi(request);
     }
     private  String uplopMi(HttpServletRequest request)throws  Exception{
-        //文档文件夹
-        String path=request.getSession().getServletContext().getRealPath("") + "\\generic\\web";
+        //上传原文件文件夹
+        String path=request.getSession().getServletContext().getRealPath("") + "\\generic\\web\\origion\\";
         File f = new File(path) ;
         if(!f.exists()) f.mkdirs() ;
+
+        //添加水印的文件夹
+        String waterFileP=request.getSession().getServletContext().getRealPath("") + "\\generic\\web\\waterFile\\";
+        File wf= new File(waterFileP);
+        if(!wf.exists()) wf.mkdirs();
 
         List<Map<String, String>> fileNames = CommonUtil.uploadWordFile(request, path) ;   //文档保存
 
@@ -50,7 +55,7 @@ public class UploadController {
             wordxx = new Wordxx() ;
             wordxx.setWordName(map.get("wordName")) ;
             wordxx.setPathName(map.get("pathName")) ;;
-            d.ini(map.get("pathName"), savePath) ;
+            d.ini(map.get("pathName"), savePath,waterFileP,map.get("wordName")) ;
             if(d.conver())
                 wordxx.setSwfShowPathName(d.getswfPath()) ;
             list.add(wordxx) ;
@@ -58,11 +63,23 @@ public class UploadController {
         HttpSession session =request.getSession();
         String swfShowPath = d.getswfPath();
         String waterFilePath =d.getFileWaterName();
-System.out.println("文件路径："+waterFilePath);
+        System.out.println("文件路径："+waterFilePath);
         session.setAttribute("swfShowPath",swfShowPath);
         session.setAttribute("waterFilePath",waterFilePath);
         return waterFilePath;
 
     }
 
+    /**
+     * 返回页面并构造文件名
+     * @param url
+     * @return
+     */
+    @RequestMapping("list")
+    public ModelAndView jsp(String url){
+        System.out.println(url);
+        ModelAndView mv = new ModelAndView("/generic/web/viewPdf.jsp");
+        mv.addObject("url","origion/"+url);
+        return mv;
+    }
 }

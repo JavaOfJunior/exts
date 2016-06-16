@@ -33,6 +33,7 @@
 <input type="text" id="url" value="<%=request.getParameter("url")%>">
 <script>
     var url =$('#url').val();
+    alert(url);
     setUrl(url);
 </script>
 <div id="outerContainer">
