@@ -9,6 +9,8 @@ import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -25,18 +27,17 @@ public class UploadController {
 
     @RequestMapping("uploads")
     public void upload(HttpServletRequest request, HttpServletResponse response)throws Exception{
-      uplopMi(request);
-      //uploGivethrows(request);
+      String url=uplopMi(request);
     }
-    private  void uplopMi(HttpServletRequest request)throws  Exception{
+    private  String uplopMi(HttpServletRequest request)throws  Exception{
         //文档文件夹
-        String path=request.getSession().getServletContext().getRealPath("") + "\\uploads";
+        String path=request.getSession().getServletContext().getRealPath("") + "\\generic\\web";
         File f = new File(path) ;
         if(!f.exists()) f.mkdirs() ;
 
         List<Map<String, String>> fileNames = CommonUtil.uploadWordFile(request, path) ;   //文档保存
 
-        String savePath = request.getSession().getServletContext().getRealPath("")+"\\uploads\\";
+        String savePath = request.getSession().getServletContext().getRealPath("")+"\\generic\\web\\";
         File f1 = new File(savePath);        //swf的文件夹
         if (!f1.exists()) {
             f1.mkdirs();
@@ -56,11 +57,12 @@ public class UploadController {
         }
         HttpSession session =request.getSession();
         String swfShowPath = d.getswfPath();
-        String waterFilePath ="/uploads/"+d.getFileWaterName();
-
+        String waterFilePath =d.getFileWaterName();
+System.out.println("文件路径："+waterFilePath);
         session.setAttribute("swfShowPath",swfShowPath);
         session.setAttribute("waterFilePath",waterFilePath);
-        System.out.println(session.getAttribute("swfShowPath")+"---------");
+        return waterFilePath;
+
     }
 
 }

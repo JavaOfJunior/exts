@@ -29,10 +29,13 @@
             // 设置为不自动上传
             auto    : false,
             // 允许上传的文件后缀
-            fileTypeExts:'*.doc;*.docx;*.xls;*.xlsx;*.ppt;*.pptx;*.pdf'
+            fileTypeExts:'*.doc;*.docx;*.xls;*.xlsx;*.ppt;*.pptx;*.pdf',
+            'onUploadComplete' : function(file) {
+                location.href="/generic/web/viewPdf.jsp?url="+file.name;
+            }
         });
     });
 </script>
 
-</body>
+
 </html>
