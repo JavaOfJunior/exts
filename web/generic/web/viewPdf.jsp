@@ -6,34 +6,34 @@
 
 <html dir="ltr" mozdisallowselectionprint moznomarginboxes>
 <head>
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="google" content="notranslate">
     <title>PDF.js viewer</title>
 
 
-    <link rel="stylesheet" href="viewer.css"/>
+    <link rel="stylesheet" href="../generic/web/viewer.css"/>
 
-    <script src="compatibility.js"></script>
-    <script src="jquery.min.js"></script>
+    <script src="../generic/web/compatibility.js"></script>
+    <script src="../generic/web/jquery.min.js"></script>
 
 
     <!-- This snippet is used in production (included from viewer.html) -->
-    <link rel="resource" type="application/l10n" href="locale/locale.properties"/>
-    <script src="l10n.js"></script>
-    <script src="../build/pdf.js"></script>
+    <link rel="resource" type="application/l10n" href="../generic/web/locale/locale.properties"/>
+    <script src="../generic/web/l10n.js"></script>
+    <script src="../../generic/build/pdf.js"></script>
 
-    <script src="debugger.js"> </script>
-    <script src="viewer.js"> </script>
+    <script src="../generic/web/debugger.js"> </script>
+    <script src="../generic/web/viewer.js"> </script>
 
 
 </head>
 
 <body tabindex="1" class="loadingInProgress">
-<input type="text" id="url" value="<%=request.getParameter("url")%>">
+<input type="text" id="url" value="<%=session.getAttribute("url")%>">
 <script>
     var url =$('#url').val();
-    alert(url);
     setUrl(url);
 </script>
 <div id="outerContainer">
