@@ -29,7 +29,7 @@ public class DocConverters {
     private File pdfFile;
     private File swfFile;
 
-    private static final String imageFilePath = "D:/11/111.png";   // 添加水印图片路径
+//    private static final String imageFilePath = "D:/11/111.png";   // 添加水印图片路径
     private String fileWaterName;   //转换水印后的docx、pdf文件绝对路径+文件名称
     private File pdfWaterFile;
 
@@ -181,64 +181,6 @@ public class DocConverters {
     public  String getFileWaterName(){
     return pdfWaterFile.getName();
 }
-    //在pdf上添加水印
-    //inputFile 原始文件
-    //outputFile 水印输出文件
-    //warterMarkName 水印名
-    private static void waterMark(String inputFile, String outputFile,String waterMarkName) {
-        try {
-            PdfReader reader = new PdfReader(inputFile);
-            // Get the PdfStamper object
-            PdfStamper stamper = new PdfStamper(reader, new FileOutputStream( outputFile));
-            // 设置密码
-            //stamper.setEncryption(userPassWord.getBytes(), ownerPassWord.getBytes(), permission, false);
-            BaseFont base = BaseFont.createFont("STSong-Light", "UniGB-UCS2-H", BaseFont.NOT_EMBEDDED);
-            int total = reader.getNumberOfPages() + 1;
-//            Image image = Image.getInstance(imageFilePath);
-//            image.setAbsolutePosition(200, 400);
-            PdfContentByte under;
-            int j = waterMarkName.length();
-            char c = 0;
-            int rise = 0;
-            for (int i = 1; i < total; i++) {
-                rise = 500;
-                under = stamper.getUnderContent(i);
-                // 添加图片
-//                under.addImage(image);
-                under.beginText();
-                under.setColorFill(BaseColor.CYAN);
-                under.setFontAndSize(base, 30);
-                // 设置水印文字字体倾斜 开始
-                if (j >= 15) {
-                    under.setTextMatrix(200, 0);
-                    for (int k = 0; k < j; k++) {
-                        under.setTextRise(rise);
-                        c = waterMarkName.charAt(k);
-                        under.showText(c + "");
-                        rise -= 20;
-                    }
-                } else {
-                    under.setTextMatrix(180, 0);
-                    for (int k = 0; k < j; k++) {
-                        under.setTextRise(rise);
-                        c = waterMarkName.charAt(k);
-                        under.showText(c + "");
-                        rise -= 18;
-                    }
-                }
-                // 字体设置结束
-                under.endText();
-                // 画一个圆
-//                under.ellipse(250, 450, 350, 550);
-//                under.setLineWidth(1f);
-//                under.stroke();
-            }
-            stamper.close();
-            System.out.println("****pdf转换成水印成功"+outputFile+"*******");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
     private static void addWatermark(PdfStamper pdfStamper, String waterMarkName) throws Exception {
         PdfContentByte content = null;
