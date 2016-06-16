@@ -37,16 +37,19 @@ public class PropertyUtil {
      * 得到水印名称
      * @return
      */
-    public static String getWaterNmae() {
+    public static String getWaterNmae() throws  Exception{
         initSysconfig();
         String waterName = prop.getProperty("system.waterName").trim();
-        if("".equals(waterName)){
-            return "waterName";
-        }else{
+        String str = new String(waterName.getBytes("ISO-8859-1"),"GBK");
+        if("".equals(str)){
             return "请保密";
+        }else{
+            return str;
         }
     }
     public  static void main(String args[]){
-        System.out.println(getWaterNmae());
+//        System.out.println(getWaterNmae());
     }
 }
+
+
