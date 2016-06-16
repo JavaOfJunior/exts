@@ -1,5 +1,6 @@
 package cn.henu.entity;
 
+import cn.henu.util.PropertyUtil;
 import com.artofsolving.jodconverter.DocumentConverter;
 import com.artofsolving.jodconverter.openoffice.connection.OpenOfficeConnection;
 import com.artofsolving.jodconverter.openoffice.connection.SocketOpenOfficeConnection;
@@ -156,7 +157,8 @@ public class DocConverters {
             System.out.println("fileString:"+fileString);
             PdfReader pdfReader = new PdfReader(fileString);
             PdfStamper pdfStamper = new PdfStamper(pdfReader, new FileOutputStream( fileWaterName+".pdf"));
-            addWatermark(pdfStamper, "请注意保密！");
+            String name = PropertyUtil.getWaterNmae();   //得到水印名字
+            addWatermark(pdfStamper,name);
             pdfStamper.close();
 
            // pdf2swf(pdfWaterFile); //把需要转换的pdf转换成swf

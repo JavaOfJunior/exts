@@ -4,12 +4,8 @@ package cn.henu.controller;
 import cn.henu.entity.CommonUtil;
 import cn.henu.entity.DocConverters;
 import cn.henu.entity.Wordxx;
-import cn.henu.util.DocConverter;
-import com.oreilly.servlet.MultipartRequest;
-import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,7 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Enumeration;
 import java.util.List;
 import java.util.Map;
 
@@ -76,10 +71,13 @@ public class UploadController {
      * @return
      */
     @RequestMapping("list")
-    public ModelAndView jsp(String url){
-        System.out.println(url);
+    public ModelAndView jsp(String url,HttpServletRequest request){
         ModelAndView mv = new ModelAndView("/generic/web/viewPdf.jsp");
-        mv.addObject("url","origion/"+url);
+        url= "../generic/web/"+"waterFile/"+url.substring(0,url.lastIndexOf("."))+"-water.pdf";
+        System.out.println("url:"+url);
+        HttpSession session =request.getSession();
+        session.setAttribute("url",url);
+        System.out.println("sessionUrl:"+session.getAttribute("url"));
         return mv;
     }
 }
