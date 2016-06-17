@@ -131,7 +131,6 @@ public class DocConverters {
         }
     }
 
-
     private String loadStream(InputStream in) throws IOException
     {
         int ptr=0;
@@ -233,18 +232,4 @@ public class DocConverters {
         }
     }
 
-
-    public static void main(String[] args)throws Exception{
-//        PdfReader pdfReader = new PdfReader("D:\\11\\chap5权限.pdf");
-//        // Get the PdfStamper object
-//        PdfStamper pdfStamper = new PdfStamper(pdfReader, new FileOutputStream( "d:\\11\\itext1-demo22.pdf"));
-//        addWatermark(pdfStamper, "公司内部文件，请注意保密！");
-//
-//        pdfStamper.close();
-//   waterMark("d:/11/12.pdf","d:/11/p1roject.pdf","主要保111存");
-//
-//        DocConverters d= new DocConverters();
-//      d.ini("D:/11/project.pdf","D:/11/");
-      // d.pdf2swf();
-    }
 }
