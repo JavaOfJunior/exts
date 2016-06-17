@@ -7,6 +7,7 @@ import java.io.IOException;
 
 /**
  * Created by junwei on 2016/6/17.
+ * 合并PDF文件
  */
 public class MergeFile {
     private static String[] getFiles(String folder) throws IOException
