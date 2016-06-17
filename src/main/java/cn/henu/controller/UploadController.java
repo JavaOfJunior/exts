@@ -21,7 +21,7 @@ import java.util.Map;
 public class UploadController {
 
     @RequestMapping("uploads")
-    public void upload(HttpServletRequest request, HttpServletResponse response)throws Exception{
+    public void upload(HttpServletRequest request)throws Exception{
       uplopMi(request);
     }
     private  void uplopMi(HttpServletRequest request)throws  Exception{
