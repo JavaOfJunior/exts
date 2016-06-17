@@ -22,9 +22,9 @@ public class UploadController {
 
     @RequestMapping("uploads")
     public void upload(HttpServletRequest request, HttpServletResponse response)throws Exception{
-      String url=uplopMi(request);
+      uplopMi(request);
     }
-    private  String uplopMi(HttpServletRequest request)throws  Exception{
+    private  void uplopMi(HttpServletRequest request)throws  Exception{
         //上传原文件文件夹
         String path=request.getSession().getServletContext().getRealPath("") + "\\generic\\web\\origion\\";
         File f = new File(path) ;
@@ -55,14 +55,6 @@ public class UploadController {
                 wordxx.setSwfShowPathName(d.getswfPath()) ;
             list.add(wordxx) ;
         }
-        HttpSession session =request.getSession();
-        String swfShowPath = d.getswfPath();
-        String waterFilePath =d.getFileWaterName();
-        System.out.println("文件路径："+waterFilePath);
-        session.setAttribute("swfShowPath",swfShowPath);
-        session.setAttribute("waterFilePath",waterFilePath);
-        return waterFilePath;
-
     }
 
     /**
