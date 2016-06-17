@@ -30,7 +30,7 @@
             // 设置为不自动上传
             auto    : false,
             // 允许上传的文件后缀
-            fileTypeExts:'*.doc;*.xls;*.ppt;*.pdf',
+            fileTypeExts:'*.pdf',
             'onUploadComplete' : function(file) {
 //                location.href="/generic/web/viewPdf.jsp?url="+file.name;
                 window.location.href="/upload/list.do?url="+file.name;
