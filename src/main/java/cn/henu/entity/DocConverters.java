@@ -29,7 +29,7 @@ public class DocConverters {
     private File pdfFile;
     private File swfFile;
 
-//    private static final String imageFilePath = "D:/11/111.png";   // 添加水印图片路径
+   private static final String imageFilePath = "D:/11/123.jpg";   // 添加水印图片路径
     private String fileWaterName;   //转换水印后的docx、pdf文件绝对路径+文件名称
     private File pdfWaterFile;
 
@@ -186,8 +186,8 @@ public class DocConverters {
         BaseFont base = null;
         com.itextpdf.text.Rectangle pageRect = null;
         PdfGState gs = new PdfGState();
-//        Image image = Image.getInstance(imageFilePath);
-//        image.setAbsolutePosition(200, 400);
+       Image image = Image.getInstance(imageFilePath);
+       image.setAbsolutePosition(200, 400);
         try {
             // 设置字体
             base = BaseFont.createFont("STSongStd-Light", "UniGB-UCS2-H",BaseFont.NOT_EMBEDDED);
@@ -212,7 +212,7 @@ public class DocConverters {
                 //获得PDF最顶层
                 content = pdfStamper.getOverContent(i);
                 content.saveState();
-//                content.addImage(image);
+                content.addImage(image);
                 content.setGState(gs);
                 content.beginText();
                 content.setColorFill(BaseColor.RED);  //设置颜色
