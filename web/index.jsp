@@ -31,7 +31,7 @@
             auto    : false,
             // 允许上传的文件后缀
             fileTypeExts:'*.pdf',
-            'onUploadComplete' : function(file) {
+            onUploadComplete : function(file) {
 //                location.href="/generic/web/viewPdf.jsp?url="+file.name;
                 window.location.href="/upload/list.do?url="+file.name;
             }
